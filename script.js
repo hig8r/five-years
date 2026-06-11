@@ -27,14 +27,14 @@ const CONFIG = {
     url: "https://maps.google.com",
   },
 
-  heroPhoto: { src: "images/page1.jpg" }, 
+  heroPhoto: { src: "images/page2.jpg" }, 
   photos: [
     { src: "images/page1.jpg", caption: "01" },
-    { src: "images/page5.jpg", caption: "02" },
-    { src: "images/page6.jpg", caption: "03" },
-    { src: "images/page7.jpg", caption: "04" },
-    { src: "images/page4.jpg", caption: "05" },
-    { src: "images/page2.jpg", caption: "06" },
+    { src: "images/page4.jpg", caption: "02" },
+    { src: "images/page5.jpg", caption: "03" },
+    { src: "images/page6.jpg", caption: "04" },
+    { src: "images/page8.jpg", caption: "05" },
+    { src: "images/page9.jpg", caption: "06" },
   ],
 };
 
