@@ -207,7 +207,6 @@ function setActive(i) {
   if (i === current && scenes[i].classList.contains("active")) return;
   current = i;
   scenes.forEach((s, k) => s.classList.toggle("active", k === i));
-  dots.forEach((d, k) => d.classList.toggle("active", k === i));
   navArrow.classList.toggle("is-last", i === scenes.length - 1);
   document.body.classList.toggle(
     "petals-on",
