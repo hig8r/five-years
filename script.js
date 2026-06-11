@@ -24,7 +24,7 @@ const CONFIG = {
 
   restaurant: {
     name: "Ver o restaurante",
-    url: "https://maps.google.com",
+    url: "https://www.restaurantebaruk.com.br/",
   },
 
   heroPhoto: { src: "images/page2.jpg" },
