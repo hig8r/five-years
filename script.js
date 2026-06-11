@@ -27,7 +27,7 @@ const CONFIG = {
     url: "https://maps.google.com",
   },
 
-  heroPhoto: { src: "images/page3.heic" }, 
+  heroPhoto: { src: "images/page1.jpg" }, 
   photos: [
     { src: "images/page1.jpg", caption: "01" },
     { src: "images/page5.jpg", caption: "02" },
