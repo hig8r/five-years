@@ -20,7 +20,7 @@ const CONFIG = {
     { label: "Japonês", correct: false },
     { label: "Árabe", correct: true },
   ],
-  quizWinText: "É comida árabe que nos espera hoje à noite, bb",
+  quizWinText: "Acertou, é comida árabe que nos espera hoje às 19h, bb.",
 
   restaurant: {
     name: "Ver o restaurante",
