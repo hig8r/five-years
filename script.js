@@ -227,7 +227,28 @@ function setActive(i) {
 
 function goTo(i) {
   if (i < 0 || i >= scenes.length) return;
-  scenes[i].scrollIntoView({ behavior: "smooth" });
+  const target = scenes[i];
+  const start = film.scrollTop;
+  const end = target.offsetTop;
+  const dist = end - start;
+  if (Math.abs(dist) < 2) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) {
+    film.scrollTop = end;
+    return;
+  }
+
+  const duration = 600;
+  let startTime = null;
+  function step(ts) {
+    if (startTime === null) startTime = ts;
+    const p = Math.min((ts - startTime) / duration, 1);
+    const ease = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // easeInOutQuad
+    film.scrollTop = start + dist * ease;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
 }
 
 const io = new IntersectionObserver(
