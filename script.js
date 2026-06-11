@@ -203,15 +203,6 @@ const scenes = Array.from(document.querySelectorAll("[data-scene]"));
 const navArrow = document.getElementById("navArrow");
 let current = 0;
 
-// pontinhos
-scenes.forEach((_, i) => {
-  const dot = document.createElement("div");
-  dot.className = "dot";
-  dot.addEventListener("click", () => goTo(i));
-  progress.appendChild(dot);
-});
-const dots = Array.from(progress.children);
-
 function setActive(i) {
   if (i === current && scenes[i].classList.contains("active")) return;
   current = i;
