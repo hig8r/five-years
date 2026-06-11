@@ -219,6 +219,10 @@ function setActive(i) {
   scenes.forEach((s, k) => s.classList.toggle("active", k === i));
   dots.forEach((d, k) => d.classList.toggle("active", k === i));
   navArrow.classList.toggle("is-last", i === scenes.length - 1);
+  document.body.classList.toggle(
+    "petals-on",
+    scenes[i].hasAttribute("data-petals"),
+  );
 }
 
 function goTo(i) {
@@ -260,13 +264,30 @@ document.getElementById("openBtn").addEventListener("click", () => {
   setTimeout(() => setActive(0), 200);
 });
 
+/* ---------- corações da intro ---------- */
+(function spawnIntroHearts() {
+  const box = document.querySelector(".intro-hearts");
+  if (!box) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const total = 14;
+  for (let i = 0; i < total; i++) {
+    const h = document.createElement("span");
+    h.className = "heart " + (i % 2 ? "right" : "left");
+    h.style.setProperty("--y", (8 + Math.random() * 55).toFixed(1) + "%");
+    h.style.setProperty("--s", (9 + Math.random() * 10).toFixed(0) + "px");
+    h.style.setProperty("--dur", (6 + Math.random() * 4).toFixed(1) + "s");
+    h.style.setProperty("--delay", (Math.random() * 6).toFixed(1) + "s");
+    box.appendChild(h);
+  }
+})();
+
 document.getElementById("surpriseBtn").addEventListener("click", () => {
   goTo(scenes.length - 1);
 });
 
 function startPetals() {
   const layer = document.getElementById("petals");
-  const colors = ["#cbb3e8", "#b89ad9", "#d9c9f0", "#e6dbf6", "#f3a07a"];
+  const colors = ["#ecc5d6", "#f5d9e6", "#c4748f", "#a8516d", "#fbeef3"];
   for (let i = 0; i < 16; i++) {
     const p = document.createElement("div");
     p.className = "pf";
