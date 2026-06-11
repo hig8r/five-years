@@ -46,7 +46,8 @@ body {
 }
 
 /* =========================================================
-   PÉTALAS (mantidas)
+   PÉTALAS — agora visíveis SÓ na cena de texto
+   (controlado por body.petals-on, setado no JS)
    ========================================================= */
 .petals {
   position: fixed;
@@ -54,6 +55,19 @@ body {
   z-index: 2;
   pointer-events: none;
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.9s ease,
+    visibility 0.9s ease;
+}
+body.petals-on .petals {
+  opacity: 1;
+  visibility: visible;
+}
+/* pausa a animação quando ocultas (economia) */
+body:not(.petals-on) .pf {
+  animation-play-state: paused;
 }
 .pf {
   position: absolute;
@@ -92,12 +106,88 @@ body {
   transition:
     opacity 1s ease,
     visibility 1s ease;
+  overflow: hidden;
 }
 #intro.hidden {
   opacity: 0;
   visibility: hidden;
 }
+
+/* corações caindo das laterais → centro (SÓ na intro) */
+.intro-hearts {
+  position: absolute;
+  inset: 0;
+  z-index: 1; /* atrás do .intro-inner */
+  pointer-events: none;
+  overflow: hidden;
+}
+#intro.hidden .intro-hearts {
+  display: none;
+}
+.heart {
+  position: absolute;
+  top: var(--y, 20%);
+  width: var(--s, 14px);
+  height: var(--s, 14px);
+  background: var(--accent);
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.heart::before {
+  top: -50%;
+  left: 0;
+}
+.heart::after {
+  left: 50%;
+  top: 0;
+}
+.heart.left {
+  left: -4%;
+  animation: heartLeft var(--dur, 7s) ease-in var(--delay, 0s) infinite;
+}
+.heart.right {
+  right: -4%;
+  animation: heartRight var(--dur, 7s) ease-in var(--delay, 0s) infinite;
+}
+@keyframes heartLeft {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-45deg) scale(0.6);
+  }
+  12% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(46vw, 26vh) rotate(-45deg) scale(1);
+  }
+}
+@keyframes heartRight {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-45deg) scale(0.6);
+  }
+  12% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-46vw, 26vh) rotate(-45deg) scale(1);
+  }
+}
+
 .intro-inner {
+  position: relative;
+  z-index: 2; /* acima dos corações */
   text-align: center;
   padding: 24px;
 }
@@ -315,6 +405,8 @@ body {
 .letter {
   max-width: 640px;
   text-align: left;
+  position: relative;
+  z-index: 3; /* legível por cima das pétalas */
 }
 .greeting {
   font-family: var(--serif);
@@ -711,7 +803,11 @@ body.started .progress {
     filter: none;
   }
   .pf,
-  .nav-arrow {
+  .nav-arrow,
+  .heart {
     animation: none;
+  }
+  .heart {
+    display: none;
   }
 }
