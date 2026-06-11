@@ -24,7 +24,7 @@ const CONFIG = {
 
   restaurant: {
     name: "Ver o restaurante",
-    url: "https://www.restaurantebaruk.com.br/",
+    url: "google.com/maps/place/R.+Clodomiro+Amazonas,+1063+-+Vila+Nova+Conceição,+São+Paulo+-+SP,+04537-012/data=!4m2!3m1!1s0x94ce5750e4ed02f3:0xa27bec0a1b22993e?sa=X&ved=1t:242&ictx=111",
   },
 
   heroPhoto: { src: "images/page2.jpg" },
