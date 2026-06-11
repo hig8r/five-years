@@ -4,7 +4,7 @@ const CONFIG = {
   welcome:
     "Preparei este cantinho só para você. Cada seção daqui pra frente é um pedacinho do que vivemos e do que ainda quero viver ao seu lado. Respira bb, vai com calma, e deixa eu te levar brevemente por essa nossa história.",
 
-   counterPhrase: "E nem todo esse tempo foi suficiente para eu cansar de vuxê.",
+  counterPhrase: "E nem todo esse tempo foi suficiente para eu cansar de vuxê.",
 
   declare: "Eu <em>te amo</em>.",
   surprise:
@@ -27,7 +27,7 @@ const CONFIG = {
     url: "https://maps.google.com",
   },
 
-  heroPhoto: { src: "images/page2.jpg" }, 
+  heroPhoto: { src: "images/page2.jpg" },
   photos: [
     { src: "images/page1.jpg", caption: "01" },
     { src: "images/page4.jpg", caption: "02" },
@@ -162,6 +162,7 @@ const rLink = document.getElementById("restaurantLink");
 rLink.href = CONFIG.restaurant.url;
 document.getElementById("restaurantName").textContent = CONFIG.restaurant.name;
 
+/* ---------- quiz ---------- */
 const quizEl = document.getElementById("quiz");
 const quizFeedback = document.getElementById("quizFeedback");
 const quizWin = document.getElementById("quizWin");
@@ -198,6 +199,7 @@ CONFIG.quizOptions.forEach((opt) => {
   quizEl.appendChild(b);
 });
 
+/* ---------- navegação ---------- */
 const film = document.getElementById("film");
 const scenes = Array.from(document.querySelectorAll("[data-scene]"));
 const navArrow = document.getElementById("navArrow");
@@ -252,6 +254,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/* ---------- abertura ---------- */
 const intro = document.getElementById("intro");
 document.getElementById("openBtn").addEventListener("click", () => {
   intro.classList.add("hidden");
@@ -264,24 +267,57 @@ document.getElementById("surpriseBtn").addEventListener("click", () => {
   goTo(scenes.length - 1);
 });
 
+/* ===========================================================
+   PÉTALAS — pequenas, caindo nas duas laterais (fora da intro)
+   =========================================================== */
 function startPetals() {
-  const layer = document.getElementById("petals");
-  const colors = ["#cbb3e8", "#b89ad9", "#d9c9f0", "#e6dbf6", "#f3a07a"];
-  for (let i = 0; i < 16; i++) {
-    const p = document.createElement("div");
-    p.className = "pf";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.background = colors[Math.floor(Math.random() * colors.length)];
-    const s = 8 + Math.random() * 12;
-    p.style.width = s + "px";
-    p.style.height = s * 1.6 + "px";
-    p.style.animationDuration = 11 + Math.random() * 12 + "s";
-    p.style.animationDelay = Math.random() * 11 + "s";
-    p.style.opacity = (0.3 + Math.random() * 0.4).toFixed(2);
-    layer.appendChild(p);
-  }
+  const colors = ["#f5d9e6", "#ecc5d6", "#c4748f", "#fbeef3", "#a8516d"];
+  const layers = [
+    document.getElementById("petalsLeft"),
+    document.getElementById("petalsRight"),
+  ];
+  layers.forEach((layer) => {
+    if (!layer) return;
+    for (let i = 0; i < 10; i++) {
+      const p = document.createElement("div");
+      p.className = "pf";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const s = 5 + Math.random() * 7; // pequenas
+      p.style.width = s + "px";
+      p.style.height = s * 1.6 + "px";
+      p.style.animationDuration = 12 + Math.random() * 12 + "s";
+      p.style.animationDelay = Math.random() * 12 + "s";
+      p.style.opacity = (0.3 + Math.random() * 0.4).toFixed(2);
+      layer.appendChild(p);
+    }
+  });
 }
 
+/* ===========================================================
+   CORAÇÕES — só na intro
+   =========================================================== */
+(function startIntroHearts() {
+  const layer = document.getElementById("introHearts");
+  if (!layer) return;
+  const colors = ["#f5d9e6", "#ecc5d6", "#c4748f", "#a8516d", "#fbeef3"];
+  for (let i = 0; i < 22; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.background = colors[Math.floor(Math.random() * colors.length)];
+    const size = 9 + Math.random() * 15;
+    h.style.width = size + "px";
+    h.style.height = size + "px";
+    h.style.animationDuration = 7 + Math.random() * 7 + "s";
+    h.style.animationDelay = Math.random() * 8 + "s";
+    layer.appendChild(h);
+  }
+})();
+
+/* ===========================================================
+   FOGOS DE ARTIFÍCIO — tons de rosa
+   =========================================================== */
 function launchFireworks() {
   const canvas = document.getElementById("fireworks");
   const ctx = canvas.getContext("2d");
@@ -299,14 +335,14 @@ function launchFireworks() {
   window.addEventListener("resize", resize);
 
   const palette = [
-    "#9b7bc4",
-    "#f6c177",
-    "#f3a07a",
-    "#d96d8a",
-    "#b89ad9",
-    "#ffd277",
-    "#fff4d6",
-    "#cbb3e8",
+    "#f5d9e6",
+    "#ecc5d6",
+    "#c4748f",
+    "#a8516d",
+    "#fbeef3",
+    "#ffd9e6",
+    "#e88aa8",
+    "#fff4f8",
   ];
   let particles = [];
   let rockets = [];
