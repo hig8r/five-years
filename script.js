@@ -201,7 +201,6 @@ CONFIG.quizOptions.forEach((opt) => {
 const film = document.getElementById("film");
 const scenes = Array.from(document.querySelectorAll("[data-scene]"));
 const navArrow = document.getElementById("navArrow");
-const progress = document.getElementById("progress");
 let current = 0;
 
 // pontinhos
