@@ -1,48 +1,33 @@
-/* ===========================================================
-   AJUSTE AQUI — tudo que você precisa mudar está nesta seção
-   =========================================================== */
 const CONFIG = {
-  // Data de início do namoro (ano, mês [0=jan, 5=jun], dia)
   startDate: new Date(2021, 5, 11),
-
-  // Seu nome (assinatura)
   name: "Higor",
-
-  // Texto de boas-vindas (seção 1)
   welcome:
     "Preparei este cantinho só para você. Cada seção daqui pra frente é um pedacinho do que vivemos e do que ainda quero viver ao seu lado. Respira bb, vai com calma, e deixa eu te levar brevemente por essa nossa história.",
 
-  // Frase de efeito do contador (seção 2)
-  counterPhrase: "E nem todo esse tempo foi suficiente para eu cansar de vuxê.",
+   counterPhrase: "E nem todo esse tempo foi suficiente para eu cansar de vuxê.",
 
-  // Declaração (seção 5). Use <em></em> para itálico de destaque.
   declare: "Eu <em>te amo</em>.",
   surprise:
     "Mas ainda não acabou... Preparei uma surpresa para hoje e ela começa com uma brincadeira. Clica no botão para descobrir.",
 
-  // Legenda da galeria (seção 4)
   galleryCaption: "Seis instantes entre milhares que guardo de nós.",
 
-  // QUIZ — resposta certa é marcada por "correct: true".
-  // Para trocar, basta mover o "correct: true" para outra opção.
   quizOptions: [
     { label: "Italiano", correct: false },
     { label: "Argentino", correct: false },
     { label: "Nordestino", correct: false },
     { label: "Americano", correct: false },
     { label: "Japonês", correct: false },
-    { label: "Árabe", correct: true }, // <-- resposta certa (provisória)
+    { label: "Árabe", correct: true },
   ],
   quizWinText: "Filiiiiz! É comida árabe que nos espera hoje à noite, bb",
 
-  // Restaurante (preencher depois)
   restaurant: {
     name: "Ver o restaurante",
     url: "https://maps.google.com",
   },
 
-  // Fotos: arquivos na pasta /images
-  heroPhoto: { src: "images/hero.jpg" }, // foto da seção 2
+  heroPhoto: { src: "images/hero.jpg" }, 
   photos: [
     { src: "images/foto1.jpg", caption: "01" },
     { src: "images/foto2.jpg", caption: "02" },
@@ -52,7 +37,6 @@ const CONFIG = {
     { src: "images/foto6.jpg", caption: "06" },
   ],
 };
-/* =========================================================== */
 
 const startYear = CONFIG.startDate.getFullYear();
 document.getElementById("introMeta").textContent =
@@ -178,9 +162,6 @@ const rLink = document.getElementById("restaurantLink");
 rLink.href = CONFIG.restaurant.url;
 document.getElementById("restaurantName").textContent = CONFIG.restaurant.name;
 
-/* ===========================================================
-   QUIZ DO RESTAURANTE
-   =========================================================== */
 const quizEl = document.getElementById("quiz");
 const quizFeedback = document.getElementById("quizFeedback");
 const quizWin = document.getElementById("quizWin");
@@ -217,9 +198,6 @@ CONFIG.quizOptions.forEach((opt) => {
   quizEl.appendChild(b);
 });
 
-/* ===========================================================
-   NAVEGAÇÃO POR SEÇÕES (scroll + snap + seta + teclado)
-   =========================================================== */
 const film = document.getElementById("film");
 const scenes = Array.from(document.querySelectorAll("[data-scene]"));
 const navArrow = document.getElementById("navArrow");
@@ -248,7 +226,6 @@ function goTo(i) {
   scenes[i].scrollIntoView({ behavior: "smooth" });
 }
 
-// detecta seção visível via IntersectionObserver
 const io = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
@@ -261,10 +238,8 @@ const io = new IntersectionObserver(
 );
 scenes.forEach((s) => io.observe(s));
 
-// seta avança
 navArrow.addEventListener("click", () => goTo(current + 1));
 
-// teclado
 document.addEventListener("keydown", (e) => {
   if (!document.body.classList.contains("started")) return;
   if (["ArrowDown", "ArrowRight", "PageDown", " "].includes(e.key)) {
@@ -277,7 +252,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/* ---------- abertura ---------- */
 const intro = document.getElementById("intro");
 document.getElementById("openBtn").addEventListener("click", () => {
   intro.classList.add("hidden");
@@ -286,16 +260,10 @@ document.getElementById("openBtn").addEventListener("click", () => {
   setTimeout(() => setActive(0), 200);
 });
 
-/* ===========================================================
-   SURPRESA — botão da seção 5 leva à seção 6 (quiz)
-   =========================================================== */
 document.getElementById("surpriseBtn").addEventListener("click", () => {
   goTo(scenes.length - 1);
 });
 
-/* ===========================================================
-   PÉTALAS (mantidas)
-   =========================================================== */
 function startPetals() {
   const layer = document.getElementById("petals");
   const colors = ["#cbb3e8", "#b89ad9", "#d9c9f0", "#e6dbf6", "#f3a07a"];
@@ -314,9 +282,6 @@ function startPetals() {
   }
 }
 
-/* ===========================================================
-   FOGOS DE ARTIFÍCIO (canvas) — disparado ao acertar o quiz
-   =========================================================== */
 function launchFireworks() {
   const canvas = document.getElementById("fireworks");
   const ctx = canvas.getContext("2d");
@@ -422,7 +387,6 @@ function launchFireworks() {
     }
   }
 
-  // estouro inicial imediato + alguns simultâneos
   for (let k = 0; k < 3; k++) {
     setTimeout(
       () =>
